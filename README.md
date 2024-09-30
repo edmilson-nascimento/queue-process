@@ -1,5 +1,5 @@
-# queue-process
- Processamento de filas SMQ2
+# Queue process
+ Processamento de filas SMQ2.
 
  
 ![Static Badge](https://img.shields.io/badge/development-abap-blue)
@@ -38,4 +38,5 @@ End(((" "))):::endClass
 
 ## Pontos de atenção 📝
 
+- A chamada da função deve ser `IN BACKGROUND TASK DESTINATION 'NONE' AS SEPARATE UNIT`
 - 

@@ -3,7 +3,7 @@
 *&---------------------------------------------------------------------*
 REPORT queue.
 
-DATA(go_qrfc) = NEW /yga/cl_qrfc( iv_campo    = '/YGA/MASS_SITRD'
+DATA(go_qrfc) = NEW z_cl_qrfc( iv_campo    = '/YGA/MASS_SITRD'
                                   iv_nr_filas = 10 ).
 
 IF go_qrfc IS NOT BOUND.

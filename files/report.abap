@@ -3,7 +3,7 @@
 *&---------------------------------------------------------------------*
 REPORT queue.
 
-CLASS cl_queue DEFINITION
+CLASS z_cl_queue DEFINITION
 CREATE
   PUBLIC
   FINAL
@@ -49,7 +49,7 @@ ENDCLASS.
 
 
 
-CLASS cl_queue IMPLEMENTATION.
+CLASS z_cl_queue IMPLEMENTATION.
 
 
   METHOD constructor.
@@ -152,16 +152,6 @@ CLASS cl_queue IMPLEMENTATION.
 
           IF sy-subrc EQ 0.
           ENDIF.
-
-*        LOOP AT lt_qview INTO ls_qview.
-*          DATA(lt_aux) = lt_qrfcqin[].
-*          DELETE lt_aux WHERE qname NE ls_qview-qname.
-*          DESCRIBE TABLE lt_aux LINES DATA(lv_lines).
-*          IF lv_lines LE lv_last.
-*            lv_last = lv_lines.
-*            gv_qname = ls_qview-qname.
-*          ENDIF.
-*        ENDLOOP.
 
           lv_max = lv_limite.
           CALL FUNCTION 'QF05_RANDOM_INTEGER'
@@ -349,21 +339,27 @@ CLASS cl_queue IMPLEMENTATION.
   ENDMETHOD.
 ENDCLASS.
 
-DATA(go_qrfc) = NEW cl_queue( iv_campo    = '/YGA/MASS_SITRD'
-                                  iv_nr_filas = 10 ).
 
-IF go_qrfc IS NOT BOUND.
-  RETURN.
-ENDIF.
+INITIALIZATION .
 
-go_qrfc->set_queue( ).
+  DATA:
+    go_qrfc TYPE REF TO z_cl_queue .
 
-DO 15 TIMES.
-  CALL FUNCTION '/YGA/QUEUE'
-    IN BACKGROUND TASK DESTINATION 'NONE' AS SEPARATE UNIT
-    EXPORTING
-      im_time = 20.
-ENDDO .
+  go_qrfc = NEW z_cl_queue( iv_campo    = '/YGA/MASS_SITRD'
+                                    iv_nr_filas = 10 ).
+
+  IF go_qrfc IS NOT BOUND.
+    RETURN.
+  ENDIF.
+
+  go_qrfc->set_queue( ).
+
+  DO 15 TIMES.
+    CALL FUNCTION '/YGA/QUEUE'
+      IN BACKGROUND TASK DESTINATION 'NONE' AS SEPARATE UNIT
+      EXPORTING
+        im_time = 20.
+  ENDDO .
 
 
 ** despoletar interface ID0021
@@ -371,4 +367,4 @@ ENDDO .
 *    EXPORTING
 *      is_viqmel = '' .
 
-COMMIT WORK.
+  COMMIT WORK.

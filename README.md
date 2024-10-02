@@ -5,8 +5,8 @@
  
 ![Static Badge](https://img.shields.io/badge/development-abap-blue)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/t/edmilson-nascimento/queue-process)
-![Static Badge](https://img.shields.io/badge/gabriel_alencar-abap-pink)
-![Static Badge](https://img.shields.io/badge/miriam_batista-abap-orange)
+![Static Badge](https://img.shields.io/badge/gabriel_alencar-abap-orange)
+![Static Badge](https://img.shields.io/badge/daniel_marques-abap-green)
 ![Static Badge](https://img.shields.io/badge/poo-abap-teal)
 
 > 🗘 Este documento, assim como o negócio, está em constante fase de melhoria e adaptação.
@@ -41,11 +41,17 @@ End(((" "))):::endClass
 
 ### Processamento
 Para o processamento de exemplo, vamos criar uma função que tera como unida função salvar um log de processamento. ~~isso basicamente diz: passou aqui!~~
-A função tem de ser criada com *Tipo de processo: Módulo de acesso remoto*.
+A função tem de ser criada com **Tipo de processo: Módulo de acesso remoto**.
 
 ![N|Solid](files/img/tipo_funcao.png)
 
+A chamada da função, por sua vez tambem é diferente. Segundo o que foi compartilhado com o respeitado consultor SAP ABAP Daniel Marques, isso vai atender um dos objetos que é _escolher o servidor que estiver mais livre (em teoria)_.
 
+Abaixo um exemplo de como ficaria a chamada da função.
+
+```abap
+
+```
 
 ## Pontos de atenção 📝
 

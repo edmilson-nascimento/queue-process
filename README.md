@@ -17,11 +17,9 @@
 ## Glossário
 
 | Sigla | Significado | Descrição |
-| :--- |:---------- |:---------- |
-| BC |B usiness Consulting | ~~Find Clarity in Chaos~~ ABAP, Desenvolvedor SAP, Consultor ABAP, SAP DEV|
+|-----|-----------|------------|
+| BC |Business Consulting | ~~Find Clarity in Chaos~~ ABAP, Desenvolvedor SAP, Consultor ABAP, SAP DEV|
  FM | Function Module ||
- New section   |     More      |         Data |
-And more      | With an escaped '\|'         || 
 
 
 
@@ -53,7 +51,8 @@ A chamada da função, por sua vez tambem é diferente. Segundo o que foi compar
 Abaixo um exemplo de como ficaria a chamada da função.
 
 ```abap
-
+    CALL FUNCTION 'Z_QUEUE'
+      IN BACKGROUND TASK DESTINATION 'NONE' AS SEPARATE UNIT
 ```
 
 ## Pontos de atenção 📝

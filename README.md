@@ -43,7 +43,7 @@ End(((" "))):::endClass
 Para o processamento de exemplo, vamos criar uma função que tera como unida função salvar um log de processamento. ~~isso basicamente diz: passou aqui!~~
 A função tem de ser criada com *Tipo de processo: Módulo de acesso remoto*.
 
-
+![N|Solid](files/img/tipo_funcao.png)
 
 
 

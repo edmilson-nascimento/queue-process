@@ -5,6 +5,8 @@
 ![Static Badge](https://img.shields.io/badge/development-abap-blue)
 ![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/t/edmilson-nascimento/queue-process)
 ![Static Badge](https://img.shields.io/badge/gabriel_alencar-abap-pink)
+![Static Badge](https://img.shields.io/badge/miriam_batista-abap-orange)
+![Static Badge](https://img.shields.io/badge/poo-abap-teal)
 
 > 🗘 Este documento, assim como o negócio, está em constante fase de melhoria e adaptação.
 

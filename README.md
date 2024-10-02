@@ -51,8 +51,10 @@ A chamada da função, por sua vez tambem é diferente. Segundo o que foi compar
 Abaixo um exemplo de como ficaria a chamada da função.
 
 ```abap
+
     CALL FUNCTION 'Z_QUEUE'
       IN BACKGROUND TASK DESTINATION 'NONE' AS SEPARATE UNIT
+
 ```
 
 ## Pontos de atenção 📝

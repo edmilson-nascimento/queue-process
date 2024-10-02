@@ -1,5 +1,6 @@
 # Queue process
  Processamento de filas SMQ2.
+ ~~no momento, eu penso que seja uma boa ideia fazer disso um post no SAP Blogs, mas isso vai por agua em alguns dias~~
 
  
 ![Static Badge](https://img.shields.io/badge/development-abap-blue)
@@ -12,15 +13,16 @@
 
 
 
-### Glossário
+## Glossário
 
 | Sigla | Significado | Descrição |
 | :--- |:---------- |:---------- |
-| BC|Business Consulting | ~~Find Clarity in Chaos~~ ABAP, Desenvolvedor SAP, Consultor ABAP, SAP DEV|
+| BC |B usiness Consulting | ~~Find Clarity in Chaos~~ ABAP, Desenvolvedor SAP, Consultor ABAP, SAP DEV|
+| FM | Function Module ||
 
 
 
-### Fluxo da solução
+## Fluxo da solução
 
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'basis' } } }%%
@@ -36,6 +38,9 @@ flowchart TB
 
 End(((" "))):::endClass
 ```
+
+### Processamento
+Para o processamento 
 
 
 ## Pontos de atenção 📝

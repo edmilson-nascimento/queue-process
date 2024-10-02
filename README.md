@@ -1,6 +1,7 @@
 # Queue process
  Processamento de filas SMQ2.
- ~~no momento, eu penso que seja uma boa ideia fazer disso um post no SAP Blogs, mas isso vai por agua em alguns dias~~
+
+ ~~no momento, eu penso que seja uma boa ideia fazer disso um post no SAP Blogs, mas essa animação vai por agua em alguns dias~~
 
  
 ![Static Badge](https://img.shields.io/badge/development-abap-blue)
@@ -18,7 +19,9 @@
 | Sigla | Significado | Descrição |
 | :--- |:---------- |:---------- |
 | BC |B usiness Consulting | ~~Find Clarity in Chaos~~ ABAP, Desenvolvedor SAP, Consultor ABAP, SAP DEV|
-| FM | Function Module ||
+ FM | Function Module ||
+ New section   |     More      |         Data |
+And more      | With an escaped '\|'         || 
 
 
 

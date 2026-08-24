@@ -9,7 +9,7 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/edmilson-nascimento/queue-process?style=flat)
 ![Static Badge](https://img.shields.io/badge/SAP-On_Premise-4666FF?style=flat)
 
-## Resumo (se você está com pressa)
+## Direto e sem rodeios
 
 Distribui processamento em massa entre N filas paralelas via qRFC (SMQ2), em
 vez de abrir um job em background por item. Pra usar:

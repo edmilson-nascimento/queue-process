@@ -9,6 +9,25 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/edmilson-nascimento/queue-process?style=flat)
 ![Static Badge](https://img.shields.io/badge/SAP-On_Premise-4666FF?style=flat)
 
+## Resumo (se você está com pressa)
+
+Distribui processamento em massa entre N filas paralelas via qRFC (SMQ2), em
+vez de abrir um job em background por item. Pra usar:
+
+1. Crie um grupo de função e, dentro dele, o Function Module RFC-enabled a
+   partir de [`files/YCA_QUEUE_WORKER.abap`](files/YCA_QUEUE_WORKER.abap).
+2. Cadastre o objeto de log em SLG0 (`YCA_QUEUE` / `WORKER`).
+3. Crie o report a partir de
+   [`files/YCA_QUEUE_DEMO.abap`](files/YCA_QUEUE_DEMO.abap) — já inclui a
+   classe dispatcher e a tela de seleção (`P_PREFIX`/`P_QCOUNT`/`P_EXEMOD`/`P_TOTAL`).
+4. Rode e acompanhe em SMQ2/SLG1.
+
+Autorizações necessárias em [Pré-requisitos](#pré-requisitos). Passo a passo
+comentado (o porquê de cada decisão) a partir de
+[Como vamos chegar lá](#como-vamos-chegar-lá).
+
+---
+
 ## Objetivo
 
 Distribuir um volume grande de processamentos por um número configurável de

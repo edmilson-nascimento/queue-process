@@ -1,4 +1,4 @@
-class /YGA/CL_QRFC definition
+class /XXX/CL_QRFC definition
   public
   final
   create public .
@@ -43,7 +43,7 @@ ENDCLASS.
 
 
 
-CLASS /YGA/CL_QRFC IMPLEMENTATION.
+CLASS /XXX/CL_QRFC IMPLEMENTATION.
 
 
   METHOD constructor.
@@ -59,11 +59,11 @@ CLASS /YGA/CL_QRFC IMPLEMENTATION.
           lv_rand      TYPE qf00-ran_int,
           lt_qview     TYPE TABLE OF tt_qview.
 
-    zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /yga/cl_fixed_values=>ac_area
-                                             i_zprocesso   = '/YGA/CL_QRFC'
+    zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /xxx/cl_fixed_values=>ac_area
+                                             i_zprocesso   = '/XXX/CL_QRFC'
                                              i_campo       = iv_campo
-                                             i_zocorrencia = /yga/cl_fixed_values=>ac_ocorrencia
-                                             i_zcontador   = /yga/cl_fixed_values=>ac_contador
+                                             i_zocorrencia = /xxx/cl_fixed_values=>ac_ocorrencia
+                                             i_zcontador   = /xxx/cl_fixed_values=>ac_contador
                                    IMPORTING e_val_min     = lv_valor
                                   EXCEPTIONS no_data       = 1
                                              OTHERS        = 2 ).
@@ -73,11 +73,11 @@ CLASS /YGA/CL_QRFC IMPLEMENTATION.
 
       IF iv_nr_filas IS INITIAL.
 
-        zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /yga/cl_fixed_values=>ac_area
-                                                 i_zprocesso   = '/YGA/CL_QRFC'
+        zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /xxx/cl_fixed_values=>ac_area
+                                                 i_zprocesso   = '/XXX/CL_QRFC'
                                                  i_campo       = 'NR_FILAS'
-                                                 i_zocorrencia = /yga/cl_fixed_values=>ac_ocorrencia
-                                                 i_zcontador   = /yga/cl_fixed_values=>ac_contador
+                                                 i_zocorrencia = /xxx/cl_fixed_values=>ac_ocorrencia
+                                                 i_zcontador   = /xxx/cl_fixed_values=>ac_contador
                                        IMPORTING e_val_min     = lv_valor2
                                       EXCEPTIONS no_data       = 1
                                                  OTHERS        = 2 ).
@@ -91,11 +91,11 @@ CLASS /YGA/CL_QRFC IMPLEMENTATION.
 
       ENDIF.
 
-      zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /yga/cl_fixed_values=>ac_area
-                                               i_zprocesso   = '/YGA/CL_QRFC'
+      zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /xxx/cl_fixed_values=>ac_area
+                                               i_zprocesso   = '/XXX/CL_QRFC'
                                                i_campo       = 'TP_FILAS'
-                                               i_zocorrencia = /yga/cl_fixed_values=>ac_ocorrencia
-                                               i_zcontador   = /yga/cl_fixed_values=>ac_contador
+                                               i_zocorrencia = /xxx/cl_fixed_values=>ac_ocorrencia
+                                               i_zcontador   = /xxx/cl_fixed_values=>ac_contador
                                      IMPORTING e_val_min     = lv_valor2
                                     EXCEPTIONS no_data       = 1
                                                OTHERS        = 2 ).

@@ -27,7 +27,7 @@ CLASS lcl_queue IMPLEMENTATION.
 
     DATA lv_nr_filas TYPE numc2 VALUE 5.
 
-    DATA(lo_qrfc) = NEW /yga/cl_qrfc( iv_campo    = '/YGA/_'
+    DATA(lo_qrfc) = NEW /xxx/cl_qrfc( iv_campo    = '/XXX/_'
                                       iv_nr_filas = lv_nr_filas ).
 
     lo_qrfc->set_queue( ).

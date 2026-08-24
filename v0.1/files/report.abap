@@ -65,11 +65,11 @@ CLASS z_cl_queue IMPLEMENTATION.
           lv_rand      TYPE qf00-ran_int,
           lt_qview     TYPE TABLE OF tt_qview.
 
-*    zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /yga/cl_fixed_values=>ac_area
-*                                             i_zprocesso   = '/YGA/CL_QRFC'
+*    zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /xxx/cl_fixed_values=>ac_area
+*                                             i_zprocesso   = '/XXX/CL_QRFC'
 *                                             i_campo       = iv_campo
-*                                             i_zocorrencia = /yga/cl_fixed_values=>ac_ocorrencia
-*                                             i_zcontador   = /yga/cl_fixed_values=>ac_contador
+*                                             i_zocorrencia = /xxx/cl_fixed_values=>ac_ocorrencia
+*                                             i_zcontador   = /xxx/cl_fixed_values=>ac_contador
 *                                   IMPORTING e_val_min     = lv_valor
 *                                  EXCEPTIONS no_data       = 1
 *                                             OTHERS        = 2 ).
@@ -79,11 +79,11 @@ CLASS z_cl_queue IMPLEMENTATION.
 *
 *      IF iv_nr_filas IS INITIAL.
 *
-*        zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /yga/cl_fixed_values=>ac_area
-*                                                 i_zprocesso   = '/YGA/CL_QRFC'
+*        zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /xxx/cl_fixed_values=>ac_area
+*                                                 i_zprocesso   = '/XXX/CL_QRFC'
 *                                                 i_campo       = 'NR_FILAS'
-*                                                 i_zocorrencia = /yga/cl_fixed_values=>ac_ocorrencia
-*                                                 i_zcontador   = /yga/cl_fixed_values=>ac_contador
+*                                                 i_zocorrencia = /xxx/cl_fixed_values=>ac_ocorrencia
+*                                                 i_zcontador   = /xxx/cl_fixed_values=>ac_contador
 *                                       IMPORTING e_val_min     = lv_valor2
 *                                      EXCEPTIONS no_data       = 1
 *                                                 OTHERS        = 2 ).
@@ -97,11 +97,11 @@ CLASS z_cl_queue IMPLEMENTATION.
 *
 *      ENDIF.
 *
-*      zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /yga/cl_fixed_values=>ac_area
-*                                               i_zprocesso   = '/YGA/CL_QRFC'
+*      zcl_ca_fixed_value=>get_value( EXPORTING i_zarea       = /xxx/cl_fixed_values=>ac_area
+*                                               i_zprocesso   = '/XXX/CL_QRFC'
 *                                               i_campo       = 'TP_FILAS'
-*                                               i_zocorrencia = /yga/cl_fixed_values=>ac_ocorrencia
-*                                               i_zcontador   = /yga/cl_fixed_values=>ac_contador
+*                                               i_zocorrencia = /xxx/cl_fixed_values=>ac_ocorrencia
+*                                               i_zcontador   = /xxx/cl_fixed_values=>ac_contador
 *                                     IMPORTING e_val_min     = lv_valor2
 *                                    EXCEPTIONS no_data       = 1
 *                                               OTHERS        = 2 ).
@@ -354,7 +354,7 @@ INITIALIZATION .
     RETURN.
   ENDIF.
 
-  DATA(go_queue_rfc) = NEW z_cl_queue( iv_campo    = '/YGA/MASS_SITRD'
+  DATA(go_queue_rfc) = NEW z_cl_queue( iv_campo    = '/XXX/MASS_SITRD'
                                        iv_nr_filas = 10 ).
   IF go_queue_rfc IS NOT BOUND.
     RETURN.
@@ -366,7 +366,7 @@ INITIALIZATION .
   " adicionando os registro na fila de processamento
   LOOP AT lt_data INTO DATA(ls_data).
 
-    CALL FUNCTION '/YGA/QUEUE'
+    CALL FUNCTION '/XXX/QUEUE'
       IN BACKGROUND TASK DESTINATION 'NONE' AS SEPARATE UNIT
       EXPORTING
         im_info = CONV symsgv( |{ ls_data-carrid } { ls_data-connid } { ls_data-currency } { ls_data-planetype }| ).

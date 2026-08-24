@@ -9,10 +9,22 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/edmilson-nascimento/queue-process?style=flat)
 ![Static Badge](https://img.shields.io/badge/SAP-On_Premise-4666FF?style=flat)
 
-## Direto e sem rodeios
+## Passo a passo resumido
 
-Distribui processamento em massa entre N filas paralelas via qRFC (SMQ2), em
-vez de abrir um job em background por item. Pra usar:
+*(pra quem conhece, isso aqui é o nosso "TL;DR" — sigla de internet que vem de "Too Long; Didn't Read")*
+
+O que segue é o **MVP** do mecanismo: o mínimo necessário pra ver a
+distribuição via qRFC funcionando de ponta a ponta, sem lógica de negócio
+real (isso é o report/worker de demonstração, não uma solução pronta pra
+produção).
+
+```mermaid
+flowchart LR
+    R[Report] --> D{Dispatcher<br/>escolhe fila}
+    D --> Q[(SMQ2)]
+    Q --> W[Worker]
+    W --> L[(SLG1)]
+```
 
 1. Crie um grupo de função e, dentro dele, o Function Module RFC-enabled a
    partir de [`files/YCA_QUEUE_WORKER.abap`](files/YCA_QUEUE_WORKER.abap).
@@ -28,13 +40,27 @@ comentado (o porquê de cada decisão) a partir de
 
 ---
 
+## Glossário
+
+| Termo | Significado |
+|---|---|
+| **qRFC** | Queued Remote Function Call — mecanismo do SAP para enfileirar chamadas RFC e processá-las de forma assíncrona e controlada |
+| **RFC** | Remote Function Call — chamada de função habilitada para execução remota/assíncrona |
+| **SMQ1** | Transação de monitoramento da fila *outbound* (saída) |
+| **SMQ2** | Transação de monitoramento da fila *inbound* (entrada) — é a que este mecanismo usa |
+| **SMQR** | Transação de registro de filas qRFC (define quem processa cada fila e em que modo) |
+| **LUW** | Logical Unit of Work — tudo que roda entre dois `COMMIT WORK`, tratado como uma unidade só |
+| **TRFCQIN** | Tabela padrão SAP com as entradas da fila inbound (SMQ2) |
+| **SLG0 / SLG1** | Customizing (SLG0) e consulta (SLG1) do Application Log |
+| **$TMP** | Pacote de objetos locais, sem transporte — existe só no mandante onde foi criado |
+| **MVP** | Minimum Viable Product — aqui, a menor implementação que já prova o mecanismo funcionando ponta a ponta |
+
 ## Objetivo
 
-Distribuir um volume grande de processamentos por um número configurável de
-**filas paralelas**, em vez de disparar um job em background pra cada item —
-evitando sobrecarregar o servidor com dezenas/centenas de jobs concorrentes.
-Quem decide quando e em qual work process cada item roda é o próprio
-scheduler de qRFC do SAP (registrado em SMQR), não o programa chamador.
+Isso evita sobrecarregar o servidor com dezenas/centenas de jobs
+concorrentes: quem decide quando e em qual work process cada item roda é o
+próprio scheduler de qRFC do SAP (registrado em SMQR), não o programa
+chamador.
 
 O report tem uma tela de seleção (`P_PREFIX`, `P_QCOUNT`, `P_EXEMOD`,
 `P_TOTAL`) — o padrão é **1 fila só**, mas dá pra testar com mais filas em

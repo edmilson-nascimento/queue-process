@@ -25,6 +25,20 @@ Solução isolada, criada do zero como exemplo/estudo, com nomes em inglês e
 namespace `Y` (fora do radar dos relatórios/transportes oficiais do
 projeto).
 
+## Pré-requisitos
+
+- Acesso a **SE37**/**SE38** (ou ADT no Eclipse) para criar o grupo de
+  função, o Function Module e o report.
+- Autorização para criar objetos locais (`$TMP`), já que nada aqui é
+  transportado.
+- Autorização para manutenção em **SMQR** (registro de fila) e para
+  visualizar **SMQ2** (monitoramento da fila inbound).
+- Autorização em **SLG0** (customizing do objeto de log) e **SLG1**
+  (consulta do Application Log).
+- Testado num sistema S/4HANA (S4D); não há dependência de release
+  específico além dos Function Modules padrão usados (`QIWK_*`,
+  `TRFC_SET_QIN_PROPERTIES`, `/SDF/MON_CALC_QCOUNT`, `CF_RECA_MESSAGE_LIST`).
+
 ## Como vamos chegar lá
 
 1. Entender o mecanismo (por que SMQ2 e não SMQ1)

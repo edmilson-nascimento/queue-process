@@ -67,7 +67,7 @@ O report tem uma tela de seleção (`P_PREFIX`, `P_QCOUNT`, `P_EXEMOD`,
 paralelo sem alterar código.
 
 Solução isolada, criada do zero como exemplo/estudo, com nomes em inglês e
-namespace `Y` (fora do radar dos relatórios/transportes oficiais do
+prefixo `YCA_` (fora do radar dos relatórios/transportes oficiais do
 projeto).
 
 ## Pré-requisitos
@@ -122,18 +122,39 @@ chama `CALL FUNCTION 'YCA_QUEUE_WORKER' IN BACKGROUND TASK DESTINATION 'NONE'
 AS SEPARATE UNIT`:
 
 ```mermaid
-graph TD
-    A[YCA_QUEUE_DEMO - START-OF-SELECTION] -->|loop P_TOTAL x| B[NEW lcl_queue_dispatcher]
-    B --> C{Sorteia 1 de P_QCOUNT<br/>nomes de fila}
-    C --> D[Verifica/repara filas<br/>em SYSFAIL]
-    D --> E[QIWK_CHECK_REGISTER /<br/>QIWK_REGISTER na SMQR]
-    E --> F[set_queue -&gt; TRFC_SET_QIN_PROPERTIES]
-    F --> G[CALL FUNCTION YCA_QUEUE_WORKER<br/>DESTINATION 'NONE' AS SEPARATE UNIT]
-    G --> H[COMMIT WORK]
-    H --> I[(SMQ2 - fila inbound<br/>YCA_QUEUE_1..N)]
-    I --> J[Scheduler QIN distribui<br/>pra um work process livre]
-    J --> K[YCA_QUEUE_WORKER roda:<br/>grava log + WAIT 2s + commit]
-    K --> L[Item sai da fila]
+flowchart TD
+    subgraph REPORT["Report YCA_QUEUE_DEMO"]
+        A["START-OF-SELECTION<br/>loop P_TOTAL×"] --> B["NEW lcl_queue_dispatcher"]
+    end
+
+    subgraph DISPATCHER["Dispatcher (constructor)"]
+        B --> C{"Sorteia 1 de<br/>P_QCOUNT filas"}
+        C --> D["Repara filas<br/>em SYSFAIL"]
+        D --> E["Registra em SMQR<br/>(QIWK_REGISTER)"]
+    end
+
+    subgraph QUEUE["Fila SMQ2"]
+        E --> F["set_queue →<br/>TRFC_SET_QIN_PROPERTIES"]
+        F --> G["CALL FUNCTION YCA_QUEUE_WORKER<br/>DESTINATION 'NONE'"]
+        G --> H["COMMIT WORK"]
+        H --> I[("YCA_QUEUE_1..N")]
+    end
+
+    subgraph WORKER["Worker YCA_QUEUE_WORKER"]
+        I --> J["Scheduler QIN escolhe<br/>work process livre"]
+        J --> K["Grava log + WAIT 2s<br/>+ COMMIT"]
+        K --> L(["Item sai da fila"])
+    end
+
+    classDef report fill:#e8eaf6,stroke:#3949ab,color:#1a237e
+    classDef dispatcher fill:#e0f2f1,stroke:#00897b,color:#004d40
+    classDef queue fill:#fff3e0,stroke:#fb8c00,color:#e65100
+    classDef worker fill:#fce4ec,stroke:#d81b60,color:#880e4f
+
+    class A,B report
+    class C,D,E dispatcher
+    class F,G,H,I queue
+    class J,K,L worker
 ```
 
 Duas peças do código de `LCL_QUEUE_DISPATCHER=>SET_QUEUE` explicam o destino:
@@ -162,7 +183,10 @@ de classe não é RFC-habilitável, então `CALL FUNCTION ... IN BACKGROUND TASK
 exige um Function Module de verdade — e, por consequência, um grupo de
 função como container. Não tem como fugir disso nem num demo.
 
-1. Criar o grupo de função `YCA_QUEUE_EXAMPLE` (só o container, sem lógica).
+1. Criar o grupo de função `YCA_QUEUE_EXAMPLE` (só o container, sem lógica):
+   SE37 → menu **Function Module → Create... → Function Group → Create
+   Group** (ou, pelo ADT, botão direito no pacote `$TMP` → **New → ABAP
+   Function Group**).
 2. SE37 (ou ADT) → criar Function Module `YCA_QUEUE_WORKER` dentro dele.
 3. Na aba **Attributes**, campo **Processing Type**, marcar
    **"Remote-Enabled Module"** (RFC) — sem isso o qRFC/QIWK não consegue
@@ -185,7 +209,8 @@ função como container. Não tem como fugir disso nem num demo.
    simultânea, mesmo com `P_TOTAL` na fila) fica visível. Numa solução real,
    essa linha deve ser removida.
 
-Fonte: [`YCA_QUEUE_WORKER.abap`](files/YCA_QUEUE_WORKER.abap)
+Cole o conteúdo de [`YCA_QUEUE_WORKER.abap`](files/YCA_QUEUE_WORKER.abap) no
+editor de fonte do FM e ative (`Ctrl+F3` ou botão **Activate**).
 
 ## Passo 3 — Cadastrar o objeto de log em SLG0
 
@@ -253,7 +278,8 @@ Por isso a lógica ficou em `START-OF-SELECTION` (roda depois que o usuário
 preenche a tela) e não mais em `INITIALIZATION` (que só serviria pra montar
 valores *default* antes da tela aparecer).
 
-Fonte: [`YCA_QUEUE_DEMO.abap`](files/YCA_QUEUE_DEMO.abap)
+Cole o conteúdo de [`YCA_QUEUE_DEMO.abap`](files/YCA_QUEUE_DEMO.abap) no
+editor de fonte do report (SE38) e ative (`Ctrl+F3` ou botão **Activate**).
 
 ## Passo 6 — Testar e validar
 

@@ -19,11 +19,12 @@ real (isso é o report/worker de demonstração, não uma solução pronta pra
 produção).
 
 ```mermaid
+%%{init: { 'flowchart': { 'curve': 'basis' } } }%%
 flowchart LR
-    R[Report] --> D{Dispatcher<br/>escolhe fila}
-    D --> Q[(SMQ2)]
-    Q --> W[Worker]
-    W --> L[(SLG1)]
+    R("Report") --> D{"Dispatcher<br/>escolhe fila"}
+    D --> Q[("<b>SMQ2</b>")]
+    Q --> W("Worker")
+    W --> L[("<b>SLG1</b>")]
 ```
 
 1. Crie um grupo de função e, dentro dele, o Function Module RFC-enabled a
@@ -122,27 +123,28 @@ chama `CALL FUNCTION 'YCA_QUEUE_WORKER' IN BACKGROUND TASK DESTINATION 'NONE'
 AS SEPARATE UNIT`:
 
 ```mermaid
+%%{init: { 'flowchart': { 'curve': 'basis' } } }%%
 flowchart TD
     subgraph REPORT["Report YCA_QUEUE_DEMO"]
-        A["START-OF-SELECTION<br/>loop P_TOTAL×"] --> B["NEW lcl_queue_dispatcher"]
+        A("<b>START-OF-SELECTION</b><br/>loop P_TOTAL×") --> B("NEW lcl_queue_dispatcher")
     end
 
     subgraph DISPATCHER["Dispatcher (constructor)"]
         B --> C{"Sorteia 1 de<br/>P_QCOUNT filas"}
-        C --> D["Repara filas<br/>em SYSFAIL"]
-        D --> E["Registra em SMQR<br/>(QIWK_REGISTER)"]
+        C --> D("Repara filas<br/>em <b>SYSFAIL</b>")
+        D --> E("Registra em <b>SMQR</b><br/>(QIWK_REGISTER)")
     end
 
     subgraph QUEUE["Fila SMQ2"]
-        E --> F["set_queue →<br/>TRFC_SET_QIN_PROPERTIES"]
-        F --> G["CALL FUNCTION YCA_QUEUE_WORKER<br/>DESTINATION 'NONE'"]
-        G --> H["COMMIT WORK"]
+        E --> F("set_queue →<br/><b>TRFC_SET_QIN_PROPERTIES</b>")
+        F --> G("CALL FUNCTION YCA_QUEUE_WORKER<br/>DESTINATION 'NONE'")
+        G --> H("<b>COMMIT WORK</b>")
         H --> I[("YCA_QUEUE_1..N")]
     end
 
     subgraph WORKER["Worker YCA_QUEUE_WORKER"]
-        I --> J["Scheduler QIN escolhe<br/>work process livre"]
-        J --> K["Grava log + WAIT 2s<br/>+ COMMIT"]
+        I --> J("Scheduler QIN escolhe<br/>work process livre")
+        J --> K("Grava log + WAIT 2s<br/>+ <b>COMMIT</b>")
         K --> L(["Item sai da fila"])
     end
 

@@ -20,10 +20,10 @@ produção).
 
 ```mermaid
 flowchart LR
-    R[Report] --> D{Dispatcher<br/>escolhe fila}
-    D --> Q[(SMQ2)]
-    Q --> W[Worker]
-    W --> L[(SLG1)]
+    R("Report") --> D{"Dispatcher<br/>escolhe fila"}
+    D --> Q[("SMQ2")]
+    Q --> W("Worker")
+    W --> L[("SLG1")]
 ```
 
 1. Crie um grupo de função e, dentro dele, o Function Module RFC-enabled a
@@ -124,25 +124,25 @@ AS SEPARATE UNIT`:
 ```mermaid
 flowchart TD
     subgraph REPORT["Report YCA_QUEUE_DEMO"]
-        A["START-OF-SELECTION<br/>loop P_TOTAL×"] --> B["NEW lcl_queue_dispatcher"]
+        A("START-OF-SELECTION<br/>loop P_TOTAL×") --> B("NEW lcl_queue_dispatcher")
     end
 
     subgraph DISPATCHER["Dispatcher (constructor)"]
         B --> C{"Sorteia 1 de<br/>P_QCOUNT filas"}
-        C --> D["Repara filas<br/>em SYSFAIL"]
-        D --> E["Registra em SMQR<br/>(QIWK_REGISTER)"]
+        C --> D("Repara filas<br/>em SYSFAIL")
+        D --> E("Registra em SMQR<br/>(QIWK_REGISTER)")
     end
 
     subgraph QUEUE["Fila SMQ2"]
-        E --> F["set_queue →<br/>TRFC_SET_QIN_PROPERTIES"]
-        F --> G["CALL FUNCTION YCA_QUEUE_WORKER<br/>DESTINATION 'NONE'"]
-        G --> H["COMMIT WORK"]
+        E --> F("set_queue →<br/>TRFC_SET_QIN_PROPERTIES")
+        F --> G("CALL FUNCTION YCA_QUEUE_WORKER<br/>DESTINATION 'NONE'")
+        G --> H("COMMIT WORK")
         H --> I[("YCA_QUEUE_1..N")]
     end
 
     subgraph WORKER["Worker YCA_QUEUE_WORKER"]
-        I --> J["Scheduler QIN escolhe<br/>work process livre"]
-        J --> K["Grava log + WAIT 2s<br/>+ COMMIT"]
+        I --> J("Scheduler QIN escolhe<br/>work process livre")
+        J --> K("Grava log + WAIT 2s<br/>+ COMMIT")
         K --> L(["Item sai da fila"])
     end
 

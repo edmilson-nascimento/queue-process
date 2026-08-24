@@ -1,5 +1,14 @@
 # Tutorial: distribuindo processamento em massa via fila SMQ1/SMQ2 (qRFC)
 
+![Static Badge](https://img.shields.io/badge/development-abap-blue?style=flat)
+![Static Badge](https://img.shields.io/badge/ABAP_OO-object_oriented-teal?style=flat)
+![Static Badge](https://img.shields.io/badge/SAP-ERP-E52731?style=flat)
+![Static Badge](https://img.shields.io/badge/development-ABAP_logging-blue?style=flat)
+![Static Badge](https://img.shields.io/badge/IDE-Eclipse_ADT-2C2255?style=flat)
+![Static Badge](https://img.shields.io/badge/Platform-GitHub-181717?style=flat)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/t/edmilson-nascimento/queue-process?style=flat)
+![Static Badge](https://img.shields.io/badge/SAP-On_Premise-4666FF?style=flat)
+
 ## Objetivo
 
 Distribuir um volume grande de processamentos por um número configurável de

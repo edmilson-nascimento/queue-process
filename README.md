@@ -8,6 +8,9 @@
 ![Static Badge](https://img.shields.io/badge/Platform-GitHub-181717?style=flat)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/edmilson-nascimento/queue-process?style=flat)
 ![Static Badge](https://img.shields.io/badge/SAP-On_Premise-4666FF?style=flat)
+![Static Badge](https://img.shields.io/badge/SAP-HANA-00A1E0?style=flat)
+![Static Badge](https://img.shields.io/badge/muriloBorges-ABAP--PO-green?style=flat)
+![Static Badge](https://img.shields.io/badge/gabrielAlencar-ABAP--OO-orange?style=flat)
 
 ## Passo a passo resumido
 
